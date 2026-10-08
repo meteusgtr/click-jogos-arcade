@@ -3,166 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CLICK ARCADE | O Maior Portal de Jogos Web & Retro</title>
-  <meta name="description" content="Jogue os maiores clássicos dos videogames direto no navegador! COD Zombies, GTA, PES 6, Quake, Halo e muito mais. Grátis e sem instalação.">
+  <meta name="referrer" content="no-referrer">
+  <title>CLICK JOGOS ARCADE | Clássicos Web & Retro</title>
+  <meta name="description" content="Os maiores jogos de console e PC rodando direto no seu navegador. Sem download, sem anúncio chato.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Rubik:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20%220%22%20%22100%22%20%22100%22><text y=%22.9em%22 font-size=%2290%22>🕹️</text></svg>">
 </head>
 <body>
 
-  <!-- Top Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#" class="logo-link" id="logoBtn">
-        <div class="logo-badge">🕹️</div>
-        <div class="logo-text">
-          <span class="logo-title">CLICK ARCADE</span>
-          <span class="logo-subtitle">Portal Web Games</span>
+  <!-- Top Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" id="logoBtn">
+        <div class="brand-icon">
+          <span>▶</span>
+        </div>
+        <div class="brand-name">
+          <span class="brand-title">CLICK<strong>JOGOS</strong></span>
+          <span class="brand-sub">ARCADE EDITION</span>
         </div>
       </a>
 
-      <!-- Search Bar -->
-      <div class="header-search">
-        <div class="search-input-wrapper">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="Pesquisar jogos (ex: Zombies, GTA, PES, Quake)..." autocomplete="off">
-          <button class="clear-search" id="clearSearchBtn">✕</button>
-        </div>
+      <!-- Search Box with Shortcut hint -->
+      <div class="search-box">
+        <span class="search-ico">🔍</span>
+        <input type="text" id="searchInput" placeholder="Buscar jogo por nome ou gênero..." autocomplete="off">
+        <kbd class="search-shortcut">/</kbd>
+        <button class="search-clear-btn" id="clearSearchBtn">✕</button>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="header-actions">
-        <button class="btn-header btn-random" id="randomGameBtn" title="Escolher um jogo aleatório">
+      <!-- Quick Action Buttons -->
+      <div class="nav-actions">
+        <button class="nav-btn btn-random-nav" id="randomGameBtn" title="Escolher um jogo aleatório">
           <span>🎲</span>
-          <span>Surpreenda-me</span>
+          <span class="btn-text">Aleatório</span>
         </button>
-        <button class="btn-header" id="favFilterQuickBtn" title="Ver meus favoritos">
-          <span>❤️</span>
-          <span id="favCountHeader">Favoritos (0)</span>
+        <button class="nav-btn btn-fav-nav" id="favFilterQuickBtn" title="Meus Favoritos">
+          <span>⭐</span>
+          <span class="btn-text" id="favCountHeader">Favoritos (0)</span>
         </button>
-        <button class="btn-header btn-donate" id="donateHeaderBtn" title="Apoiar o projeto">
-          <span>💛</span>
-          <span>Apoiar Projeto</span>
+        <button class="nav-btn btn-coffee" id="donateHeaderBtn" title="Apoiar o site">
+          <span>☕</span>
+          <span class="btn-text">Pagar um Café</span>
         </button>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <!-- Hero Banner -->
-    <section class="hero-banner" id="heroBanner">
-      <div class="hero-card">
-        <div class="hero-content">
-          <span class="hero-tag">🔥 Destaque da Semana</span>
-          <h1 class="hero-title">COD: Kino der Toten</h1>
-          <p class="hero-desc">O modo zumbis mais celebrado de todos os tempos rodando a 60 FPS diretamente no seu navegador, sem precisar instalar nada!</p>
-          <div class="hero-cta-group">
-            <button class="btn-cta-primary" id="heroPlayBtn" data-game-id="kino-der-toten">
-              <span>▶</span>
+  <main class="main-layout">
+    <!-- Hero Spotlight Section -->
+    <section class="spotlight-section" id="heroBanner">
+      <div class="spotlight-card">
+        <div class="spotlight-content">
+          <div class="spotlight-badge">🔥 JOGO EM DESTAQUE</div>
+          <h1 class="spotlight-title">COD: Kino der Toten</h1>
+          <p class="spotlight-synopsis">O lendário modo zumbis no cinema abandonado. Ative o teletransportador, compre vantagens nas máquinas e sobreviva às hordas a 60 FPS direto no navegador!</p>
+          <div class="spotlight-meta">
+            <span class="meta-tag">🧟 Zumbis</span>
+            <span class="meta-tag">🎯 FPS</span>
+            <span class="meta-tag">★ 5.0</span>
+            <span class="meta-tag">⚡ Sem Download</span>
+          </div>
+          <div class="spotlight-actions">
+            <button class="btn-play-large" id="heroPlayBtn" data-game-id="kino-der-toten">
               <span>JOGAR AGORA</span>
+              <span class="play-arrow">▶</span>
             </button>
-            <button class="btn-header" id="heroDetailsBtn" data-game-id="kino-der-toten">
-              <span>ℹ️</span>
-              <span>Ver Detalhes</span>
+            <button class="btn-ghost-spotlight" id="heroDetailsBtn" data-game-id="kino-der-toten">
+              Ver Controles
             </button>
           </div>
         </div>
-        <div class="hero-visual">
-          <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1000&auto=format&fit=crop&q=80" alt="Kino der Toten Banner" id="heroImg">
+        <div class="spotlight-cover">
+          <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=900&auto=format&fit=crop&q=80" alt="Kino der Toten" id="heroImg">
+          <div class="spotlight-cover-fade"></div>
         </div>
       </div>
     </section>
 
-    <!-- Stats Ribbon -->
-    <div class="stats-ribbon">
-      <div class="stat-item">
-        <span class="stat-icon">🎮</span>
-        <div class="stat-info">
-          <h4 id="totalGamesStat">24 Jogos</h4>
-          <p>Catálogo Selecionado</p>
-        </div>
-      </div>
-      <div class="stat-item">
-        <span class="stat-icon">⚡</span>
-        <div class="stat-info">
-          <h4>100% Grátis</h4>
-          <p>Sem Downloads ou Plugins</p>
-        </div>
-      </div>
-      <div class="stat-item">
-        <span class="stat-icon">🌐</span>
-        <div class="stat-info">
-          <h4>WebAssembly & WebGL</h4>
-          <p>Alta Performance</p>
-        </div>
-      </div>
-      <div class="stat-item">
-        <span class="stat-icon">📱</span>
-        <div class="stat-info">
-          <h4>PC & Mobile</h4>
-          <p>Jogue onde quiser</p>
-        </div>
+    <!-- Genre Categories Navigation Bar -->
+    <div class="category-strip">
+      <div class="category-scroll" id="categoryTabs">
+        <button class="cat-pill active" data-cat="all">
+          <span class="cat-emoji">🔥</span>
+          <span>Todos</span>
+          <span class="cat-badge-num" id="count-all">24</span>
+        </button>
+        <button class="cat-pill" data-cat="zombies">
+          <span class="cat-emoji">🧟</span>
+          <span>Zumbis</span>
+          <span class="cat-badge-num" id="count-zombies">4</span>
+        </button>
+        <button class="cat-pill" data-cat="fps">
+          <span class="cat-emoji">🎯</span>
+          <span>Tiro & FPS</span>
+          <span class="cat-badge-num" id="count-fps">6</span>
+        </button>
+        <button class="cat-pill" data-cat="acao">
+          <span class="cat-emoji">🏎️</span>
+          <span>GTA & Ação</span>
+          <span class="cat-badge-num" id="count-acao">3</span>
+        </button>
+        <button class="cat-pill" data-cat="esportes">
+          <span class="cat-emoji">⚽</span>
+          <span>Futebol & Skate</span>
+          <span class="cat-badge-num" id="count-esportes">3</span>
+        </button>
+        <button class="cat-pill" data-cat="classicos">
+          <span class="cat-emoji">👾</span>
+          <span>Clássicos 90/00</span>
+          <span class="cat-badge-num" id="count-classicos">7</span>
+        </button>
+        <button class="cat-pill" data-cat="diversao">
+          <span class="cat-emoji">🦔</span>
+          <span>Estratégia</span>
+          <span class="cat-badge-num" id="count-diversao">1</span>
+        </button>
+        <button class="cat-pill" data-cat="favorites">
+          <span class="cat-emoji">⭐</span>
+          <span>Favoritos</span>
+          <span class="cat-badge-num" id="count-favorites">0</span>
+        </button>
       </div>
     </div>
 
-    <!-- Category Tabs -->
-    <nav class="categories-wrapper">
-      <div class="category-tabs" id="categoryTabs">
-        <button class="cat-btn active" data-cat="all">
-          <span>🌟</span>
-          <span>Todos</span>
-          <span class="cat-count" id="count-all">0</span>
-        </button>
-        <button class="cat-btn" data-cat="zombies">
-          <span>🧟</span>
-          <span>Zumbis</span>
-          <span class="cat-count" id="count-zombies">0</span>
-        </button>
-        <button class="cat-btn" data-cat="fps">
-          <span>💥</span>
-          <span>FPS / Tiro</span>
-          <span class="cat-count" id="count-fps">0</span>
-        </button>
-        <button class="cat-btn" data-cat="acao">
-          <span>🚗</span>
-          <span>Ação & GTA</span>
-          <span class="cat-count" id="count-acao">0</span>
-        </button>
-        <button class="cat-btn" data-cat="esportes">
-          <span>⚽</span>
-          <span>Esportes & Skate</span>
-          <span class="cat-count" id="count-esportes">0</span>
-        </button>
-        <button class="cat-btn" data-cat="classicos">
-          <span>🏛️</span>
-          <span>Clássicos & Retro</span>
-          <span class="cat-count" id="count-classicos">0</span>
-        </button>
-        <button class="cat-btn" data-cat="diversao">
-          <span>🦔</span>
-          <span>Diversão</span>
-          <span class="cat-count" id="count-diversao">0</span>
-        </button>
-        <button class="cat-btn" data-cat="favorites">
-          <span>⭐</span>
-          <span>Favoritos</span>
-          <span class="cat-count" id="count-favorites">0</span>
-        </button>
+    <!-- Filter & Sort Header Bar -->
+    <div class="browse-header">
+      <div class="browse-title-group">
+        <h2 class="browse-title" id="currentSectionTitle">Todos os Jogos</h2>
+        <span class="browse-counter"><strong id="displayedCount">24</strong> jogos disponíveis</span>
       </div>
-    </nav>
 
-    <!-- Controls Bar -->
-    <div class="controls-bar">
-      <div class="results-count">
-        Exibindo <span id="displayedCount">0</span> jogos
-      </div>
-      <div class="sort-group">
-        <label for="sortSelect">Ordenar por:</label>
-        <select id="sortSelect" class="sort-select">
-          <option value="popular">Mais Populares</option>
+      <div class="browse-sort">
+        <span class="sort-label">Ordenar:</span>
+        <select id="sortSelect" class="sort-dropdown">
+          <option value="popular">Mais Jogados</option>
           <option value="rating">Melhor Avaliados</option>
           <option value="name">Nome (A - Z)</option>
         </select>
@@ -170,180 +148,163 @@
     </div>
 
     <!-- Games Grid -->
-    <section class="games-grid" id="gamesGrid">
-      <!-- Inserido dinamicamente via JS -->
-    </section>
+    <div class="games-grid" id="gamesGrid">
+      <!-- Renderizado dinamicamente via JS -->
+    </div>
 
-    <!-- Donation Banner -->
-    <section class="donate-banner-section">
-      <div class="donate-banner-card">
-        <div class="donate-banner-content">
-          <div class="donate-pill">💛 Ajude o Projeto</div>
-          <h2 class="donate-banner-title">Mantenha os Servidores e Jogos Online!</h2>
-          <p class="donate-banner-desc">
-            Este site é 100% gratuito e mantido de forma independente. Sua contribuição de qualquer valor via PayPal ou QR Code ajuda a cobrir custos de hospedagem e manter novos clássicos sendo adicionados para todo mundo!
+    <!-- Creator Coffee / Donate Section -->
+    <section class="coffee-card-section">
+      <div class="coffee-card">
+        <div class="coffee-text-block">
+          <div class="coffee-badge">☕ APOIE O PROJETO</div>
+          <h3 class="coffee-heading">Curtiu os jogos? Pague um café pro dev!</h3>
+          <p class="coffee-sub">
+            O site é 100% livre de propagandas que travam o jogo. Se você quiser ajudar a manter os servidores funcionando e novos clássicos sendo adicionados, qualquer contribuição no PayPal ou Pix via QR Code fortalece demais!
           </p>
-          <div class="donate-banner-actions">
-            <a href="https://www.paypal.com/donate/?business=6WQ6X5NMLS2QS&no_recurring=0&item_name=Ajude+o+projeto&currency_code=BRL" target="_blank" rel="noopener noreferrer" class="btn-paypal-cta">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.769.769 0 0 1 .758-.642h6.812c3.551 0 6.012 1.83 5.485 5.568-.456 3.237-2.616 5.093-5.748 5.093H9.418a.77.77 0 0 0-.76.643l-1.582 6.955zm9.585-12.83c-.352 2.502-2.148 3.99-4.83 3.99H9.378l1.32-5.8h2.09c1.944 0 3.518.326 3.873 1.81z"/></svg>
-              <span>Doar com PayPal</span>
+          <div class="coffee-btn-group">
+            <a href="https://www.paypal.com/donate/?business=6WQ6X5NMLS2QS&no_recurring=0&item_name=Ajude+o+projeto&currency_code=BRL" target="_blank" rel="noopener noreferrer" class="btn-paypal-coffee">
+              <span>Doar via PayPal (BRL)</span>
+              <span>➜</span>
             </a>
-            <button type="button" class="btn-qr-cta" id="bannerQrBtn">
-              <span>📱 Doar via QR Code</span>
+            <button type="button" class="btn-qr-coffee" id="bannerQrBtn">
+              <span>📱 Ver QR Code</span>
             </button>
           </div>
         </div>
-        <div class="donate-banner-qr">
-          <div class="qr-container-card" id="bannerQrCard">
-            <img src="qrcode-donate.png" alt="QR Code Doação PayPal" class="qr-img">
-            <span>Aponte a câmera para doar</span>
-          </div>
+        <div class="coffee-qr-block" id="bannerQrCard" title="Clique para ampliar o QR Code">
+          <img src="qrcode-donate.png" alt="QR Code Doação PayPal" class="coffee-qr-img">
+          <span class="qr-helper">Aponte a câmera para doar</span>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Player Modal (In-Page Gameplay Stage) -->
-  <div class="player-modal" id="playerModal">
-    <div class="player-header">
-      <div class="player-game-info">
-        <div>
-          <h3 class="player-game-title" id="playerTitle">Carregando Jogo...</h3>
-          <span class="player-game-category" id="playerCategory">Categoria</span>
-        </div>
+  <!-- Player Theater Modal -->
+  <div class="theater-modal" id="playerModal">
+    <div class="theater-toolbar">
+      <div class="theater-game-meta">
+        <h3 class="theater-title" id="playerTitle">Carregando Jogo...</h3>
+        <span class="theater-category" id="playerCategory">Categoria</span>
       </div>
-      <div class="player-controls">
-        <button class="player-btn" id="playerFullscreenBtn" title="Jogar em Tela Cheia">
+
+      <div class="theater-actions">
+        <button class="theater-btn" id="playerFullscreenBtn" title="Tela Cheia">
           <span>⛶</span>
           <span>Tela Cheia</span>
         </button>
-        <button class="player-btn" id="playerReloadBtn" title="Recarregar o jogo sem sair da página">
+        <button class="theater-btn" id="playerReloadBtn" title="Recarregar sem sair da página">
           <span>🔄</span>
-          <span>Recarregar Jogo</span>
+          <span>Recarregar</span>
         </button>
-        <button class="player-btn btn-player-donate" id="playerDonateBtn" title="Apoiar o projeto com PayPal ou QR Code">
-          <span>💛</span>
-          <span>Doar</span>
+        <button class="theater-btn btn-theater-coffee" id="playerDonateBtn" title="Apoiar com café">
+          <span>☕</span>
+          <span>Apoiar</span>
         </button>
-        <button class="player-btn" id="playerShareBtn" title="Copiar link para amigos">
+        <button class="theater-btn" id="playerShareBtn" title="Copiar link para amigos">
           <span>🔗</span>
           <span>Compartilhar</span>
         </button>
-        <button class="player-btn" id="playerFavBtn" title="Favoritar">
+        <button class="theater-btn" id="playerFavBtn" title="Favoritar">
           <span>🤍</span>
         </button>
-        <button class="player-btn btn-close" id="playerCloseBtn" title="Fechar Jogo">
+        <button class="theater-btn btn-close-theater" id="playerCloseBtn" title="Fechar (ESC)">
           <span>✕</span>
           <span>Fechar</span>
         </button>
       </div>
     </div>
 
-    <div class="player-body">
-      <!-- Fallback Bar -->
-      <div class="iframe-fallback-bar">
-        <div class="fallback-warning">
-          <span>💡</span>
-          <span>Se o jogo demorar para carregar, basta <strong>atualizar a página</strong> ou clicar em <strong>"Recarregar Jogo"</strong>!</span>
-        </div>
-        <span id="playerStatusBadge">🎮 Carregando emulador...</span>
-      </div>
-
-      <!-- Iframe -->
-      <div class="iframe-container" id="iframeContainer">
-        <iframe id="gameIframe" class="game-iframe" src="" allow="autoplay; fullscreen; gamepad; cross-origin-isolated" allowfullscreen></iframe>
-      </div>
+    <!-- Notice Bar -->
+    <div class="theater-notice-bar">
+      <span>💡 Se o jogo demorar para carregar, basta <strong>atualizar a página</strong> ou clicar em <strong>"Recarregar"</strong>!</span>
+      <span class="theater-status" id="playerStatusBadge">⚡ Iniciando emulador...</span>
     </div>
 
-    <!-- Player Footer Info -->
-    <div class="player-footer-info">
-      <div class="controls-guide">
-        <h5>⌨️ Controles do Jogo</h5>
-        <div class="controls-text" id="playerControlsText">
+    <!-- Game Viewport Frame -->
+    <div class="theater-screen-wrapper" id="iframeContainer">
+      <iframe id="gameIframe" class="game-viewport-frame" src="" allow="autoplay; fullscreen; gamepad; cross-origin-isolated" allowfullscreen></iframe>
+    </div>
+
+    <!-- Game Drawer Info -->
+    <div class="theater-drawer">
+      <div class="drawer-controls">
+        <h4>⌨️ CONTROLES</h4>
+        <div class="keyboard-guide" id="playerControlsText">
           WASD: Mover | Mouse: Mirar e Atirar | Espaço: Pular
         </div>
       </div>
-      <div class="game-details">
-        <h5>📝 Sobre este Jogo</h5>
+      <div class="drawer-desc">
+        <h4>📝 SOBRE O JOGO</h4>
         <p id="playerDescriptionText">Descrição do jogo...</p>
       </div>
-      <div class="player-donate-box">
-        <h5>💛 Ajude o Projeto</h5>
-        <p>Gostando da jogatina? Ajude a manter este jogo online para todo mundo:</p>
-        <div class="player-donate-row">
-          <a href="https://www.paypal.com/donate/?business=6WQ6X5NMLS2QS&no_recurring=0&item_name=Ajude+o+projeto&currency_code=BRL" target="_blank" rel="noopener noreferrer" class="btn-paypal-mini">
-            <span>💙 Doar (PayPal)</span>
+      <div class="drawer-tip">
+        <h4>☕ FORTALEÇA O SITE</h4>
+        <p>Curtiu a jogatina? Apoie para manter novos jogos online:</p>
+        <div class="drawer-tip-btns">
+          <a href="https://www.paypal.com/donate/?business=6WQ6X5NMLS2QS&no_recurring=0&item_name=Ajude+o+projeto&currency_code=BRL" target="_blank" rel="noopener noreferrer" class="btn-tip-paypal">
+            <span>PayPal (BRL)</span>
           </a>
-          <button type="button" class="btn-qr-mini" id="playerQrTriggerBtn" title="Ver QR Code">
-            <span>📱 QR Code</span>
+          <button type="button" class="btn-tip-qr" id="playerQrTriggerBtn">
+            <span>QR Code</span>
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Donate Modal Dialog -->
-  <div class="donate-modal-overlay" id="donateModalOverlay">
-    <div class="donate-modal-dialog">
-      <button class="donate-modal-close" id="closeDonateModalBtn" title="Fechar">✕</button>
-      <div class="donate-modal-header">
-        <div class="donate-icon-circle">💛</div>
-        <h3>Ajude o Click Arcade</h3>
-        <p>Sua doação ajuda a pagar a hospedagem e a manter os 24 jogos rodando direto no navegador para todo mundo!</p>
+  <!-- Donate & QR Modal Dialog -->
+  <div class="donate-backdrop" id="donateModalOverlay">
+    <div class="donate-dialog-box">
+      <button class="donate-close-btn" id="closeDonateModalBtn">✕</button>
+      
+      <div class="donate-dialog-header">
+        <span class="donate-dialog-emoji">☕</span>
+        <h3>Pagar um Café pro Dev</h3>
+        <p>Ajude a cobrir os custos de servidor para manter os 24 clássicos rodando online sem propagandas chatas!</p>
       </div>
 
-      <div class="donate-modal-body">
-        <!-- PayPal direct option -->
-        <div class="donate-choice-card">
-          <div class="choice-title">
+      <div class="donate-dialog-grid">
+        <div class="donate-card-btn-block">
+          <div class="donate-block-title">
             <span>💙</span>
-            <strong>Doar via PayPal</strong>
+            <strong>Doação via PayPal</strong>
           </div>
-          <p>Contribua com qualquer quantia de forma segura usando saldo, cartão ou débito em Reais (BRL).</p>
-          <a href="https://www.paypal.com/donate/?business=6WQ6X5NMLS2QS&no_recurring=0&item_name=Ajude+o+projeto&currency_code=BRL" target="_blank" rel="noopener noreferrer" class="btn-paypal-modal">
-            <span>Acessar Página de Doação</span>
+          <p>Contribua com qualquer valor em Reais (BRL) usando cartão ou conta PayPal.</p>
+          <a href="https://www.paypal.com/donate/?business=6WQ6X5NMLS2QS&no_recurring=0&item_name=Ajude+o+projeto&currency_code=BRL" target="_blank" rel="noopener noreferrer" class="btn-paypal-open">
+            <span>Abrir Página de Doação</span>
             <span>➜</span>
           </a>
         </div>
 
-        <!-- QR Code option -->
-        <div class="donate-choice-card qr-card-center">
-          <div class="choice-title">
+        <div class="donate-card-qr-block">
+          <div class="donate-block-title">
             <span>📱</span>
             <strong>Doar via QR Code</strong>
           </div>
-          <p>Aponte a câmera do seu smartphone ou aplicativo para o QR Code abaixo:</p>
-          <div class="qr-modal-preview">
-            <img src="qrcode-donate.png" alt="QR Code de Doação PayPal" class="qr-modal-img">
+          <p>Aponte a câmera do seu aplicativo de pagamento:</p>
+          <div class="qr-dialog-img-wrap">
+            <img src="qrcode-donate.png" alt="QR Code Doação" class="qr-dialog-img">
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toastNotification">
+  <!-- Toast Toast -->
+  <div class="toast-bubble" id="toastNotification">
     <span id="toastIcon">✅</span>
-    <span id="toastMessage">Ação realizada com sucesso!</span>
+    <span id="toastMessage">Sucesso!</span>
   </div>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="logo-link">
-          <div class="logo-badge">🕹️</div>
-          <div class="logo-text">
-            <span class="logo-title">CLICK ARCADE</span>
-            <span class="logo-subtitle">Seu portal nostálgico de web games</span>
-          </div>
-        </div>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">
-          Inspirado na clássica era dos portais de jogos dos anos 2000, adaptado com tecnologia WebAssembly moderna.
-        </p>
+  <footer class="arcade-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-title">CLICK<strong>JOGOS</strong></div>
+        <p>Feito por quem ama os jogos clássicos de lan house e console. Só clicar e jogar.</p>
       </div>
-      <div class="footer-disclaimer">
-        Este portal é um agregador e demonstrador de tecnologias WebAssembly, WebGL e emulação web. Todos os jogos, marcas registradas e propriedades intelectuais pertencem aos seus respectivos desenvolvedores e estúdios originais.
+      <div class="footer-legal">
+        Todos os direitos e propriedades intelectuais dos jogos pertencem aos seus desenvolvedores e publicadoras originais.
       </div>
     </div>
   </footer>

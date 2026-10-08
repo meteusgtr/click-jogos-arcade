@@ -1,4 +1,4 @@
-// Click Arcade Portal - Main Logic
+// Click Jogos Arcade - Main Engine
 document.addEventListener('DOMContentLoaded', () => {
   // State
   let games = typeof GAMES_DATA !== 'undefined' ? [...GAMES_DATA] : [];
@@ -10,6 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // LocalStorage keys
   const FAV_KEY = 'click_arcade_favorites';
   const PLAYS_KEY = 'click_arcade_plays';
+
+  // Category Title Map
+  const CATEGORY_TITLES = {
+    all: 'Todos os Jogos',
+    zombies: 'Jogos de Zumbis',
+    fps: 'Tiro & FPS',
+    acao: 'GTA & Ação',
+    esportes: 'Futebol & Skate',
+    classicos: 'Clássicos dos Anos 90 e 2000',
+    diversao: 'Estratégia & Diversão',
+    favorites: 'Meus Favoritos'
+  };
 
   // Helper for favorites
   function getFavorites() {
@@ -37,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       favs.push(id);
       isFav = true;
-      showToast('Adicionado aos favoritos!', '❤️');
+      showToast('Adicionado aos favoritos!', '⭐');
     }
     setFavorites(favs);
     updateFavCounts();
@@ -58,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
       plays[id] = (plays[id] || 0) + 1;
       localStorage.setItem(PLAYS_KEY, JSON.stringify(plays));
       
-      // Update local game object
       const g = games.find(item => item.id === id);
       if (g) {
         g.plays += 1;
@@ -79,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       toast.classList.remove('show');
-    }, 2800);
+    }, 2600);
   }
 
   // DOM Elements
@@ -89,10 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const categoryTabs = document.getElementById('categoryTabs');
   const sortSelect = document.getElementById('sortSelect');
   const displayedCount = document.getElementById('displayedCount');
+  const currentSectionTitle = document.getElementById('currentSectionTitle');
   const randomGameBtn = document.getElementById('randomGameBtn');
   const favFilterQuickBtn = document.getElementById('favFilterQuickBtn');
   const favCountHeader = document.getElementById('favCountHeader');
-  const totalGamesStat = document.getElementById('totalGamesStat');
   const logoBtn = document.getElementById('logoBtn');
 
   // Player Elements
@@ -113,6 +124,42 @@ document.addEventListener('DOMContentLoaded', () => {
   // Hero elements
   const heroPlayBtn = document.getElementById('heroPlayBtn');
   const heroDetailsBtn = document.getElementById('heroDetailsBtn');
+
+  // Donate Elements
+  const donateModalOverlay = document.getElementById('donateModalOverlay');
+  const closeDonateModalBtn = document.getElementById('closeDonateModalBtn');
+  const donateHeaderBtn = document.getElementById('donateHeaderBtn');
+  const playerDonateBtn = document.getElementById('playerDonateBtn');
+  const playerQrTriggerBtn = document.getElementById('playerQrTriggerBtn');
+  const bannerQrBtn = document.getElementById('bannerQrBtn');
+  const bannerQrCard = document.getElementById('bannerQrCard');
+
+  function openDonateModal() {
+    if (donateModalOverlay) {
+      donateModalOverlay.classList.add('active');
+    }
+  }
+
+  function closeDonateModal() {
+    if (donateModalOverlay) {
+      donateModalOverlay.classList.remove('active');
+    }
+  }
+
+  if (donateHeaderBtn) donateHeaderBtn.addEventListener('click', openDonateModal);
+  if (playerDonateBtn) playerDonateBtn.addEventListener('click', openDonateModal);
+  if (playerQrTriggerBtn) playerQrTriggerBtn.addEventListener('click', openDonateModal);
+  if (bannerQrBtn) bannerQrBtn.addEventListener('click', openDonateModal);
+  if (bannerQrCard) bannerQrCard.addEventListener('click', openDonateModal);
+  if (closeDonateModalBtn) closeDonateModalBtn.addEventListener('click', closeDonateModal);
+
+  if (donateModalOverlay) {
+    donateModalOverlay.addEventListener('click', (e) => {
+      if (e.target === donateModalOverlay) {
+        closeDonateModal();
+      }
+    });
+  }
 
   // Update counts on categories
   function updateFavCounts() {
@@ -144,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (el) el.textContent = counts[cat];
     });
 
-    if (totalGamesStat) totalGamesStat.textContent = `${games.length} Jogos`;
     updateFavCounts();
   }
 
@@ -190,13 +236,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const filtered = getFilteredGames();
     displayedCount.textContent = filtered.length;
 
+    // Update section title
+    if (currentSectionTitle) {
+      if (searchQuery.trim() !== '') {
+        currentSectionTitle.textContent = `Resultados para "${searchQuery}"`;
+      } else {
+        currentSectionTitle.textContent = CATEGORY_TITLES[currentCategory] || 'Todos os Jogos';
+      }
+    }
+
     if (filtered.length === 0) {
       gamesGrid.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">🎮</div>
+        <div class="empty-box">
+          <div style="font-size: 2.8rem;">🕹️</div>
           <h3>Nenhum jogo encontrado</h3>
-          <p>Tente buscar por outro termo ou mude de categoria.</p>
-          <button class="btn-cta-primary" id="resetFiltersBtn" style="margin: 0 auto;">Ver Todos os Jogos</button>
+          <p>Tente buscar por outro termo ou selecione outra categoria.</p>
+          <button class="btn-play-large" id="resetFiltersBtn" style="margin: 0 auto; padding: 10px 22px; font-size: 0.9rem;">Ver Todos os Jogos</button>
         </div>
       `;
       const resetBtn = document.getElementById('resetFiltersBtn');
@@ -206,8 +261,8 @@ document.addEventListener('DOMContentLoaded', () => {
           searchQuery = '';
           searchInput.value = '';
           clearSearchBtn.style.display = 'none';
-          document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-          const allBtn = document.querySelector('.cat-btn[data-cat="all"]');
+          document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+          const allBtn = document.querySelector('.cat-pill[data-cat="all"]');
           if (allBtn) allBtn.classList.add('active');
           renderGames();
         });
@@ -218,25 +273,25 @@ document.addEventListener('DOMContentLoaded', () => {
     gamesGrid.innerHTML = filtered.map(game => {
       const fav = isFavorite(game.id);
       const formattedPlays = game.plays >= 1000 ? `${(game.plays / 1000).toFixed(1)}k` : game.plays;
-      const badgeColor = game.badgeColor || 'orange';
 
       return `
-        <div class="game-card" data-id="${game.id}">
-          <div class="card-thumb-wrap">
-            <img src="${game.thumbnail}" alt="${game.title}" class="card-thumb" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600'">
-            <span class="card-badge ${badgeColor}">${game.badge}</span>
-            <button class="fav-btn ${fav ? 'active' : ''}" data-fav-id="${game.id}" title="${fav ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}">
+        <div class="game-item" data-id="${game.id}">
+          <div class="game-thumbnail-box">
+            <img src="${game.thumbnail}" alt="${game.title}" class="game-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600'">
+            <span class="game-tag-badge">${game.badge}</span>
+            <button class="game-fav-trigger ${fav ? 'active' : ''}" data-fav-id="${game.id}" title="${fav ? 'Remover dos favoritos' : 'Favoritar'}">
               ${fav ? '❤️' : '🤍'}
             </button>
-            <div class="card-overlay-btn">▶</div>
+            <div class="game-hover-play">
+              <div class="play-circle">▶</div>
+            </div>
           </div>
-          <div class="card-body">
-            <span class="card-category">${game.categoryLabel}</span>
-            <h3 class="card-title">${game.title}</h3>
-            <p class="card-desc">${game.description}</p>
-            <div class="card-footer">
-              <span class="rating-stars">⭐ ${game.rating.toFixed(1)}</span>
-              <span class="plays-counter">🔥 ${formattedPlays} jogadas</span>
+          <div class="game-info-box">
+            <span class="game-cat-label">${game.categoryLabel}</span>
+            <h3 class="game-name">${game.title}</h3>
+            <div class="game-bottom-row">
+              <span class="game-rating">★ ${game.rating.toFixed(1)}</span>
+              <span class="game-plays">🔥 ${formattedPlays}</span>
             </div>
           </div>
         </div>
@@ -244,17 +299,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
 
     // Attach card click handlers
-    document.querySelectorAll('.game-card').forEach(card => {
+    document.querySelectorAll('.game-item').forEach(card => {
       card.addEventListener('click', (e) => {
-        // If clicked favorite button, don't open modal
-        if (e.target.closest('.fav-btn')) return;
+        if (e.target.closest('.game-fav-trigger')) return;
         const id = card.getAttribute('data-id');
         openGame(id);
       });
     });
 
     // Attach favorite toggle handlers
-    document.querySelectorAll('.fav-btn').forEach(btn => {
+    document.querySelectorAll('.game-fav-trigger').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const id = btn.getAttribute('data-fav-id');
@@ -277,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     playerDescriptionText.textContent = game.description;
 
     // Load iframe
-    playerStatusBadge.textContent = '⚡ Carregando jogo...';
+    playerStatusBadge.textContent = '⚡ Iniciando emulador...';
     gameIframe.src = game.url;
 
     // Update favorite icon in player
@@ -293,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updatePlayerFavBtn(fav) {
     playerFavBtn.innerHTML = fav ? '❤️' : '🤍';
-    playerFavBtn.title = fav ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
+    playerFavBtn.title = fav ? 'Remover dos favoritos' : 'Favoritar';
   }
 
   // Close Game Player
@@ -325,42 +379,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event Listeners
   playerCloseBtn.addEventListener('click', closeGame);
 
-  // Donate Modal Elements & Logic
-  const donateModalOverlay = document.getElementById('donateModalOverlay');
-  const closeDonateModalBtn = document.getElementById('closeDonateModalBtn');
-  const donateHeaderBtn = document.getElementById('donateHeaderBtn');
-  const playerDonateBtn = document.getElementById('playerDonateBtn');
-  const playerQrTriggerBtn = document.getElementById('playerQrTriggerBtn');
-  const bannerQrBtn = document.getElementById('bannerQrBtn');
-  const bannerQrCard = document.getElementById('bannerQrCard');
-
-  function openDonateModal() {
-    if (donateModalOverlay) {
-      donateModalOverlay.classList.add('active');
-    }
-  }
-
-  function closeDonateModal() {
-    if (donateModalOverlay) {
-      donateModalOverlay.classList.remove('active');
-    }
-  }
-
-  if (donateHeaderBtn) donateHeaderBtn.addEventListener('click', openDonateModal);
-  if (playerDonateBtn) playerDonateBtn.addEventListener('click', openDonateModal);
-  if (playerQrTriggerBtn) playerQrTriggerBtn.addEventListener('click', openDonateModal);
-  if (bannerQrBtn) bannerQrBtn.addEventListener('click', openDonateModal);
-  if (bannerQrCard) bannerQrCard.addEventListener('click', openDonateModal);
-  if (closeDonateModalBtn) closeDonateModalBtn.addEventListener('click', closeDonateModal);
-
-  if (donateModalOverlay) {
-    donateModalOverlay.addEventListener('click', (e) => {
-      if (e.target === donateModalOverlay) {
-        closeDonateModal();
-      }
-    });
-  }
-
   // Close with ESC key
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -368,9 +386,16 @@ document.addEventListener('DOMContentLoaded', () => {
         closeDonateModal();
         return;
       }
-      if (playerModal.classList.contains('active')) {
+      if (playerModal && playerModal.classList.contains('active')) {
         closeGame();
       }
+    }
+
+    // Shortcut "/" to search
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      e.preventDefault();
+      searchInput.focus();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
 
@@ -401,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeGame) {
       const shareUrl = `${window.location.origin}${window.location.pathname}#${activeGame.id}`;
       navigator.clipboard.writeText(shareUrl).then(() => {
-        showToast('Link do jogo copiado para o clipboard! 📋');
+        showToast('Link do jogo copiado! 📋');
       }).catch(() => {
         showToast(`Copie o link: ${shareUrl}`);
       });
@@ -410,10 +435,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Category Buttons
   categoryTabs.addEventListener('click', (e) => {
-    const btn = e.target.closest('.cat-btn');
+    const btn = e.target.closest('.cat-pill');
     if (!btn) return;
 
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
     currentCategory = btn.getAttribute('data-cat');
@@ -446,18 +471,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (games.length === 0) return;
     const randomIndex = Math.floor(Math.random() * games.length);
     const chosen = games[randomIndex];
-    showToast(`Carregando ${chosen.title}... 🎲`, '🕹️');
+    showToast(`Iniciando ${chosen.title}... 🎲`, '🕹️');
     openGame(chosen.id);
   });
 
   // Quick Fav Filter
   favFilterQuickBtn.addEventListener('click', () => {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    const favTab = document.querySelector('.cat-btn[data-cat="favorites"]');
+    document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+    const favTab = document.querySelector('.cat-pill[data-cat="favorites"]');
     if (favTab) favTab.classList.add('active');
     currentCategory = 'favorites';
     renderGames();
-    // Scroll to categories
     window.scrollTo({ top: 380, behavior: 'smooth' });
   });
 
@@ -468,8 +492,8 @@ document.addEventListener('DOMContentLoaded', () => {
     searchQuery = '';
     searchInput.value = '';
     clearSearchBtn.style.display = 'none';
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    const allTab = document.querySelector('.cat-btn[data-cat="all"]');
+    document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+    const allTab = document.querySelector('.cat-pill[data-cat="all"]');
     if (allTab) allTab.classList.add('active');
     renderGames();
     window.scrollTo({ top: 0, behavior: 'smooth' });
