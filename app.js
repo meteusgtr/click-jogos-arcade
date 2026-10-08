@@ -325,10 +325,52 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event Listeners
   playerCloseBtn.addEventListener('click', closeGame);
 
+  // Donate Modal Elements & Logic
+  const donateModalOverlay = document.getElementById('donateModalOverlay');
+  const closeDonateModalBtn = document.getElementById('closeDonateModalBtn');
+  const donateHeaderBtn = document.getElementById('donateHeaderBtn');
+  const playerDonateBtn = document.getElementById('playerDonateBtn');
+  const playerQrTriggerBtn = document.getElementById('playerQrTriggerBtn');
+  const bannerQrBtn = document.getElementById('bannerQrBtn');
+  const bannerQrCard = document.getElementById('bannerQrCard');
+
+  function openDonateModal() {
+    if (donateModalOverlay) {
+      donateModalOverlay.classList.add('active');
+    }
+  }
+
+  function closeDonateModal() {
+    if (donateModalOverlay) {
+      donateModalOverlay.classList.remove('active');
+    }
+  }
+
+  if (donateHeaderBtn) donateHeaderBtn.addEventListener('click', openDonateModal);
+  if (playerDonateBtn) playerDonateBtn.addEventListener('click', openDonateModal);
+  if (playerQrTriggerBtn) playerQrTriggerBtn.addEventListener('click', openDonateModal);
+  if (bannerQrBtn) bannerQrBtn.addEventListener('click', openDonateModal);
+  if (bannerQrCard) bannerQrCard.addEventListener('click', openDonateModal);
+  if (closeDonateModalBtn) closeDonateModalBtn.addEventListener('click', closeDonateModal);
+
+  if (donateModalOverlay) {
+    donateModalOverlay.addEventListener('click', (e) => {
+      if (e.target === donateModalOverlay) {
+        closeDonateModal();
+      }
+    });
+  }
+
   // Close with ESC key
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && playerModal.classList.contains('active')) {
-      closeGame();
+    if (e.key === 'Escape') {
+      if (donateModalOverlay && donateModalOverlay.classList.contains('active')) {
+        closeDonateModal();
+        return;
+      }
+      if (playerModal.classList.contains('active')) {
+        closeGame();
+      }
     }
   });
 

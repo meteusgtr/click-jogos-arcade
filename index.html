@@ -43,6 +43,10 @@
           <span>❤️</span>
           <span id="favCountHeader">Favoritos (0)</span>
         </button>
+        <button class="btn-header btn-donate" id="donateHeaderBtn" title="Apoiar o projeto">
+          <span>💛</span>
+          <span>Apoiar Projeto</span>
+        </button>
       </div>
     </div>
   </header>
@@ -169,6 +173,34 @@
     <section class="games-grid" id="gamesGrid">
       <!-- Inserido dinamicamente via JS -->
     </section>
+
+    <!-- Donation Banner -->
+    <section class="donate-banner-section">
+      <div class="donate-banner-card">
+        <div class="donate-banner-content">
+          <div class="donate-pill">💛 Ajude o Projeto</div>
+          <h2 class="donate-banner-title">Mantenha os Servidores e Jogos Online!</h2>
+          <p class="donate-banner-desc">
+            Este site é 100% gratuito e mantido de forma independente. Sua contribuição de qualquer valor via PayPal ou QR Code ajuda a cobrir custos de hospedagem e manter novos clássicos sendo adicionados para todo mundo!
+          </p>
+          <div class="donate-banner-actions">
+            <a href="https://www.paypal.com/donate/?business=6WQ6X5NMLS2QS&no_recurring=0&item_name=Ajude+o+projeto&currency_code=BRL" target="_blank" rel="noopener noreferrer" class="btn-paypal-cta">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.769.769 0 0 1 .758-.642h6.812c3.551 0 6.012 1.83 5.485 5.568-.456 3.237-2.616 5.093-5.748 5.093H9.418a.77.77 0 0 0-.76.643l-1.582 6.955zm9.585-12.83c-.352 2.502-2.148 3.99-4.83 3.99H9.378l1.32-5.8h2.09c1.944 0 3.518.326 3.873 1.81z"/></svg>
+              <span>Doar com PayPal</span>
+            </a>
+            <button type="button" class="btn-qr-cta" id="bannerQrBtn">
+              <span>📱 Doar via QR Code</span>
+            </button>
+          </div>
+        </div>
+        <div class="donate-banner-qr">
+          <div class="qr-container-card" id="bannerQrCard">
+            <img src="qrcode-donate.png" alt="QR Code Doação PayPal" class="qr-img">
+            <span>Aponte a câmera para doar</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Player Modal (In-Page Gameplay Stage) -->
@@ -188,6 +220,10 @@
         <button class="player-btn" id="playerReloadBtn" title="Recarregar o jogo sem sair da página">
           <span>🔄</span>
           <span>Recarregar Jogo</span>
+        </button>
+        <button class="player-btn btn-player-donate" id="playerDonateBtn" title="Apoiar o projeto com PayPal ou QR Code">
+          <span>💛</span>
+          <span>Doar</span>
         </button>
         <button class="player-btn" id="playerShareBtn" title="Copiar link para amigos">
           <span>🔗</span>
@@ -230,6 +266,57 @@
       <div class="game-details">
         <h5>📝 Sobre este Jogo</h5>
         <p id="playerDescriptionText">Descrição do jogo...</p>
+      </div>
+      <div class="player-donate-box">
+        <h5>💛 Ajude o Projeto</h5>
+        <p>Gostando da jogatina? Ajude a manter este jogo online para todo mundo:</p>
+        <div class="player-donate-row">
+          <a href="https://www.paypal.com/donate/?business=6WQ6X5NMLS2QS&no_recurring=0&item_name=Ajude+o+projeto&currency_code=BRL" target="_blank" rel="noopener noreferrer" class="btn-paypal-mini">
+            <span>💙 Doar (PayPal)</span>
+          </a>
+          <button type="button" class="btn-qr-mini" id="playerQrTriggerBtn" title="Ver QR Code">
+            <span>📱 QR Code</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donate Modal Dialog -->
+  <div class="donate-modal-overlay" id="donateModalOverlay">
+    <div class="donate-modal-dialog">
+      <button class="donate-modal-close" id="closeDonateModalBtn" title="Fechar">✕</button>
+      <div class="donate-modal-header">
+        <div class="donate-icon-circle">💛</div>
+        <h3>Ajude o Click Arcade</h3>
+        <p>Sua doação ajuda a pagar a hospedagem e a manter os 24 jogos rodando direto no navegador para todo mundo!</p>
+      </div>
+
+      <div class="donate-modal-body">
+        <!-- PayPal direct option -->
+        <div class="donate-choice-card">
+          <div class="choice-title">
+            <span>💙</span>
+            <strong>Doar via PayPal</strong>
+          </div>
+          <p>Contribua com qualquer quantia de forma segura usando saldo, cartão ou débito em Reais (BRL).</p>
+          <a href="https://www.paypal.com/donate/?business=6WQ6X5NMLS2QS&no_recurring=0&item_name=Ajude+o+projeto&currency_code=BRL" target="_blank" rel="noopener noreferrer" class="btn-paypal-modal">
+            <span>Acessar Página de Doação</span>
+            <span>➜</span>
+          </a>
+        </div>
+
+        <!-- QR Code option -->
+        <div class="donate-choice-card qr-card-center">
+          <div class="choice-title">
+            <span>📱</span>
+            <strong>Doar via QR Code</strong>
+          </div>
+          <p>Aponte a câmera do seu smartphone ou aplicativo para o QR Code abaixo:</p>
+          <div class="qr-modal-preview">
+            <img src="qrcode-donate.png" alt="QR Code de Doação PayPal" class="qr-modal-img">
+          </div>
+        </div>
       </div>
     </div>
   </div>
